@@ -1,0 +1,24 @@
+<.header>
+  Vendor <%= @vendor.id %>
+  <:subtitle>This is a vendor record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/vendors/#{@vendor}/edit"}>
+      <.button>Edit vendor</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @vendor.name %></:item>
+  <:item title="Facility type"><%= @vendor.facility_type %></:item>
+  <:item title="Location description"><%= @vendor.location_description %></:item>
+  <:item title="Address"><%= @vendor.address %></:item>
+  <:item title="Permit status"><%= @vendor.permit_status %></:item>
+  <:item title="Food items"><%= @vendor.food_items %></:item>
+  <:item title="Latitude"><%= @vendor.latitude %></:item>
+  <:item title="Longitude"><%= @vendor.longitude %></:item>
+  <:item title="Prior permit"><%= @vendor.prior_permit %></:item>
+  <:item title="Expiration"><%= @vendor.expiration %></:item>
+</.list>
+
+<.back navigate={~p"/vendors"}>Back to vendors</.back>

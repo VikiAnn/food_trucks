@@ -1,0 +1,18 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:name]} type="text" label="Name" />
+  <.input field={f[:facility_type]} type="text" label="Facility type" />
+  <.input field={f[:location_description]} type="text" label="Location description" />
+  <.input field={f[:address]} type="text" label="Address" />
+  <.input field={f[:permit_status]} type="text" label="Permit status" />
+  <.input field={f[:food_items]} type="text" label="Food items" />
+  <.input field={f[:latitude]} type="number" label="Latitude" step="any" />
+  <.input field={f[:longitude]} type="number" label="Longitude" step="any" />
+  <.input field={f[:prior_permit]} type="checkbox" label="Prior permit" />
+  <.input field={f[:expiration]} type="datetime-local" label="Expiration" />
+  <:actions>
+    <.button>Save Vendor</.button>
+  </:actions>
+</.simple_form>

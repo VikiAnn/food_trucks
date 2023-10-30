@@ -1,0 +1,8 @@
+<.header>
+  Edit Vendor <%= @vendor.id %>
+  <:subtitle>Use this form to manage vendor records in your database.</:subtitle>
+</.header>
+
+<.vendor_form changeset={@changeset} action={~p"/vendors/#{@vendor}"} />
+
+<.back navigate={~p"/vendors"}>Back to vendors</.back>

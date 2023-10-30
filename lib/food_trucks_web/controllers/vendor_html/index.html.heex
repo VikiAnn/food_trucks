@@ -1,0 +1,32 @@
+<.header>
+  Listing Vendors
+  <:actions>
+    <.link href={~p"/vendors/new"}>
+      <.button>New Vendor</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="vendors" rows={@vendors} row_click={&JS.navigate(~p"/vendors/#{&1}")}>
+  <:col :let={vendor} label="Name"><%= vendor.name %></:col>
+  <:col :let={vendor} label="Facility type"><%= vendor.facility_type %></:col>
+  <:col :let={vendor} label="Location description"><%= vendor.location_description %></:col>
+  <:col :let={vendor} label="Address"><%= vendor.address %></:col>
+  <:col :let={vendor} label="Permit status"><%= vendor.permit_status %></:col>
+  <:col :let={vendor} label="Food items"><%= vendor.food_items %></:col>
+  <:col :let={vendor} label="Latitude"><%= vendor.latitude %></:col>
+  <:col :let={vendor} label="Longitude"><%= vendor.longitude %></:col>
+  <:col :let={vendor} label="Prior permit"><%= vendor.prior_permit %></:col>
+  <:col :let={vendor} label="Expiration"><%= vendor.expiration %></:col>
+  <:action :let={vendor}>
+    <div class="sr-only">
+      <.link navigate={~p"/vendors/#{vendor}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/vendors/#{vendor}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={vendor}>
+    <.link href={~p"/vendors/#{vendor}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>
