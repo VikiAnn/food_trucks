@@ -20,7 +20,25 @@ defmodule FoodTrucks.SanFranEats.Vendor do
   @doc false
   def changeset(vendor, attrs) do
     vendor
-    |> cast(attrs, [:name, :facility_type, :location_description, :address, :permit_status, :food_items, :latitude, :longitude, :prior_permit, :expiration])
-    |> validate_required([:name, :facility_type, :location_description, :address, :permit_status, :food_items, :latitude, :longitude, :prior_permit, :expiration])
+    |> cast(attrs, [
+      :name,
+      :facility_type,
+      :location_description,
+      :address,
+      :permit_status,
+      :food_items,
+      :latitude,
+      :longitude,
+      :prior_permit,
+      :expiration
+    ])
+    |> validate_required([
+      :name,
+      :address,
+      :permit_status,
+      :latitude,
+      :longitude,
+      :prior_permit
+    ])
   end
 end

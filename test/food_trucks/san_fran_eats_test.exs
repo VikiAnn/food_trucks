@@ -12,17 +12,15 @@ defmodule FoodTrucks.SanFranEatsTest do
       name: nil,
       address: nil,
       facility_type: nil,
-      location_description: nil,
       permit_status: nil,
-      food_items: nil,
       latitude: nil,
       longitude: nil,
-      prior_permit: nil,
-      expiration: nil
+      prior_permit: nil
     }
 
     test "read vendors from a CSV" do
-      assert SanFranEats.from_csv(~c"food_trucks.csv") == []
+      vendor_rows = SanFranEats.from_csv(~c"food_trucks.csv")
+      assert Enum.all?(vendor_rows, fn row -> row.valid? && row.errors == [] end)
     end
 
     test "list_vendors/0 returns all vendors" do
@@ -40,26 +38,20 @@ defmodule FoodTrucks.SanFranEatsTest do
         name: "some name",
         address: "some address",
         facility_type: "some facility_type",
-        location_description: "some location_description",
         permit_status: "some permit_status",
-        food_items: "some food_items",
         latitude: 120.5,
         longitude: 120.5,
-        prior_permit: true,
-        expiration: ~N[2023-10-29 23:48:00]
+        prior_permit: true
       }
 
       assert {:ok, %Vendor{} = vendor} = SanFranEats.create_vendor(valid_attrs)
       assert vendor.name == "some name"
       assert vendor.address == "some address"
       assert vendor.facility_type == "some facility_type"
-      assert vendor.location_description == "some location_description"
       assert vendor.permit_status == "some permit_status"
-      assert vendor.food_items == "some food_items"
       assert vendor.latitude == 120.5
       assert vendor.longitude == 120.5
       assert vendor.prior_permit == true
-      assert vendor.expiration == ~N[2023-10-29 23:48:00]
     end
 
     test "create_vendor/1 with invalid data returns error changeset" do
