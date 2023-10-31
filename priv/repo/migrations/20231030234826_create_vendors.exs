@@ -8,7 +8,7 @@ defmodule FoodTrucks.Repo.Migrations.CreateVendors do
       add :location_description, :string
       add :address, :string
       add :permit_status, :string
-      add :food_items, :string
+      add :food_items, :text
       add :latitude, :float
       add :longitude, :float
       add :prior_permit, :boolean, default: false, null: false

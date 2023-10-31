@@ -19,7 +19,7 @@ defmodule FoodTrucks.SanFranEatsTest do
     }
 
     test "read vendors from a CSV" do
-      vendor_rows = SanFranEats.from_csv(~c"food_trucks.csv")
+      vendor_rows = SanFranEats.from_csv(~c"priv/repo/seed_data/food_trucks.csv")
       assert Enum.all?(vendor_rows, fn row -> row.valid? && row.errors == [] end)
     end
 
