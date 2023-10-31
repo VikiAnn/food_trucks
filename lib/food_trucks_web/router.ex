@@ -17,7 +17,7 @@ defmodule FoodTrucksWeb.Router do
   scope "/", FoodTrucksWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    get "/", VendorController, :index
     resources "/vendors", VendorController
   end
 
