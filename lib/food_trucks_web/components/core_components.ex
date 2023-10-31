@@ -20,6 +20,25 @@ defmodule FoodTrucksWeb.CoreComponents do
   import FoodTrucksWeb.Gettext
 
   @doc """
+    Renders a map element.
+  """
+  attr :id, :string, required: true
+  attr :vendors, :list, required: true
+
+  def map_box(assigns) do
+    ~H"""
+    <article id={@id} phx-hook="MapTrace" class="h-96"></article>
+    <script>
+      let map = document.querySelector('#<%= @id %>');
+
+      <%= for {_id, vendor} <- @vendors do %>
+          new mapboxgl.Marker().setLngLat([<%= vendor.longitude %>, <%= vendor.latitude %>]).addTo(map);
+      <% end %>
+    </script>
+    """
+  end
+
+  @doc """
   Renders a modal.
 
   ## Examples
