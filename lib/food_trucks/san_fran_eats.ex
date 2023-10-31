@@ -1,12 +1,9 @@
-NimbleCSV.define(FoodTrucks.VendorParser, separator: ",", escape: "\"")
-
 defmodule FoodTrucks.SanFranEats do
   @moduledoc """
   The SanFranEats context.
   """
 
   import Ecto.Query, warn: false
-  alias FoodTrucks.VendorParser
   alias FoodTrucks.Repo
 
   alias FoodTrucks.SanFranEats.Vendor
@@ -23,7 +20,7 @@ defmodule FoodTrucks.SanFranEats do
   def from_csv(filename) do
     filename
     |> File.stream!(read_ahead: 100_000)
-    |> VendorParser.parse_stream()
+    |> CSV.decode(headers: true)
     |> Stream.map(&csv_row/1)
     |> Enum.to_list()
   end
@@ -122,37 +119,21 @@ defmodule FoodTrucks.SanFranEats do
     Vendor.changeset(vendor, attrs)
   end
 
-  defp csv_row([
-         _,
-         name,
-         facility_type,
-         _,
-         location_description,
-         address,
-         _,
-         _,
-         _,
-         _,
-         permit_status,
-         food_items,
-         _,
-         _,
-         latitude,
-         longitude,
-         _,
-         _,
-         _,
-         _,
-         _,
-         prior_permit,
-         expiration,
-         _,
-         _,
-         _,
-         _,
-         _,
-         _
-       ]) do
+  defp csv_row(
+         {:ok,
+          %{
+            "Address" => address,
+            "Applicant" => name,
+            "ExpirationDate" => expiration,
+            "FacilityType" => facility_type,
+            "FoodItems" => food_items,
+            "Latitude" => latitude,
+            "Longitude" => longitude,
+            "LocationDescription" => location_description,
+            "PriorPermit" => prior_permit,
+            "Status" => permit_status
+          }}
+       ) do
     change_vendor(%Vendor{}, %{
       "name" => name,
       "address" => address,
