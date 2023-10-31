@@ -17,8 +17,14 @@ defmodule FoodTrucksWeb.Router do
   scope "/", FoodTrucksWeb do
     pipe_through :browser
 
-    get "/", VendorController, :index
-    resources "/vendors", VendorController
+    live "/", VendorLive.Index, :index
+
+    live "/vendors", VendorLive.Index, :index
+    live "/vendors/new", VendorLive.Index, :new
+    live "/vendors/:id/edit", VendorLive.Index, :edit
+
+    live "/vendors/:id", VendorLive.Show, :show
+    live "/vendors/:id/show/edit", VendorLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
