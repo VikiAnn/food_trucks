@@ -8,7 +8,22 @@ defmodule FoodTrucks.SanFranEatsTest do
 
     import FoodTrucks.SanFranEatsFixtures
 
-    @invalid_attrs %{name: nil, address: nil, facility_type: nil, location_description: nil, permit_status: nil, food_items: nil, latitude: nil, longitude: nil, prior_permit: nil, expiration: nil}
+    @invalid_attrs %{
+      name: nil,
+      address: nil,
+      facility_type: nil,
+      location_description: nil,
+      permit_status: nil,
+      food_items: nil,
+      latitude: nil,
+      longitude: nil,
+      prior_permit: nil,
+      expiration: nil
+    }
+
+    test "read vendors from a CSV" do
+      assert SanFranEats.from_csv(~c"food_trucks.csv") == []
+    end
 
     test "list_vendors/0 returns all vendors" do
       vendor = vendor_fixture()
@@ -21,7 +36,18 @@ defmodule FoodTrucks.SanFranEatsTest do
     end
 
     test "create_vendor/1 with valid data creates a vendor" do
-      valid_attrs = %{name: "some name", address: "some address", facility_type: "some facility_type", location_description: "some location_description", permit_status: "some permit_status", food_items: "some food_items", latitude: 120.5, longitude: 120.5, prior_permit: true, expiration: ~N[2023-10-29 23:48:00]}
+      valid_attrs = %{
+        name: "some name",
+        address: "some address",
+        facility_type: "some facility_type",
+        location_description: "some location_description",
+        permit_status: "some permit_status",
+        food_items: "some food_items",
+        latitude: 120.5,
+        longitude: 120.5,
+        prior_permit: true,
+        expiration: ~N[2023-10-29 23:48:00]
+      }
 
       assert {:ok, %Vendor{} = vendor} = SanFranEats.create_vendor(valid_attrs)
       assert vendor.name == "some name"
@@ -42,7 +68,19 @@ defmodule FoodTrucks.SanFranEatsTest do
 
     test "update_vendor/2 with valid data updates the vendor" do
       vendor = vendor_fixture()
-      update_attrs = %{name: "some updated name", address: "some updated address", facility_type: "some updated facility_type", location_description: "some updated location_description", permit_status: "some updated permit_status", food_items: "some updated food_items", latitude: 456.7, longitude: 456.7, prior_permit: false, expiration: ~N[2023-10-30 23:48:00]}
+
+      update_attrs = %{
+        name: "some updated name",
+        address: "some updated address",
+        facility_type: "some updated facility_type",
+        location_description: "some updated location_description",
+        permit_status: "some updated permit_status",
+        food_items: "some updated food_items",
+        latitude: 456.7,
+        longitude: 456.7,
+        prior_permit: false,
+        expiration: ~N[2023-10-30 23:48:00]
+      }
 
       assert {:ok, %Vendor{} = vendor} = SanFranEats.update_vendor(vendor, update_attrs)
       assert vendor.name == "some updated name"
