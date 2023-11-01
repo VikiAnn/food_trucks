@@ -44,4 +44,18 @@ defmodule FoodTrucksWeb.VendorLive.Index do
 
     {:noreply, stream_delete(socket, :vendors, vendor)}
   end
+
+  def handle_event("after_render", _, socket) do
+    vendors = SanFranEats.list_vendors()
+
+    markers =
+      Enum.map(vendors, fn %{latitude: latitude, longitude: longitude} ->
+        %{latitude: latitude, longitude: longitude}
+      end)
+
+    socket =
+      push_event(socket, "vendorMarkers", %{markers: markers})
+
+    {:noreply, socket}
+  end
 end
