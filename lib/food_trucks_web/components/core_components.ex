@@ -23,11 +23,10 @@ defmodule FoodTrucksWeb.CoreComponents do
     Renders a map element.
   """
   attr :id, :string, required: true
-  attr :vendors, :list, required: true
 
   def map_box(assigns) do
     ~H"""
-    <article id={@id} phx-hook="MapTrace" class="h-96"></article>
+    <article id={@id} phx-hook="MapBoxHook" class="h-96 mt-3"></article>
     """
   end
 

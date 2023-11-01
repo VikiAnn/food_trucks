@@ -19,7 +19,6 @@ defmodule FoodTrucksWeb.Router do
 
     live "/", VendorLive.Index, :index
 
-    live "/vendors", VendorLive.Index, :index
     live "/vendors/new", VendorLive.Index, :new
     live "/vendors/:id/edit", VendorLive.Index, :edit
 

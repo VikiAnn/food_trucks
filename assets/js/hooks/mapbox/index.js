@@ -1,6 +1,6 @@
 import mapboxgl from "mapbox-gl"
 
-const MapTrace = {
+const MapBoxHook = {
     initMap() {
         mapboxgl.accessToken = "pk.eyJ1IjoidmlraWhhcnJvZCIsImEiOiJjbG9lcnd2YzcwZTd4MmpvM25hOGJ4eDI5In0.u-6tFAKTJuvIblVID8_8RA";
 
@@ -20,7 +20,6 @@ const MapTrace = {
         this.handleEvent("vendorMarkers", e => {
             e.markers.map(marker => {
                 const coords = [marker.longitude, marker.latitude];
-                console.log(coords);
                 new mapboxgl.Marker().setLngLat(coords).addTo(this.map);
             })
         })
@@ -29,4 +28,4 @@ const MapTrace = {
     },
 };
 
-export { MapTrace };
+export { MapBoxHook };

@@ -21,9 +21,14 @@
   <:item title="Expiration"><%= @vendor.expiration %></:item>
 </.list>
 
-<.back navigate={~p"/vendors"}>Back to vendors</.back>
+<.back navigate={~p"/"}>Back to vendors</.back>
 
-<.modal :if={@live_action == :edit} id="vendor-modal" show on_cancel={JS.patch(~p"/vendors/#{@vendor}")}>
+<.modal
+  :if={@live_action == :edit}
+  id="vendor-modal"
+  show
+  on_cancel={JS.patch(~p"/vendors/#{@vendor}")}
+>
   <.live_component
     module={FoodTrucksWeb.VendorLive.FormComponent}
     id={@vendor.id}

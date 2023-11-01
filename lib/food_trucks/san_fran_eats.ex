@@ -152,7 +152,7 @@ defmodule FoodTrucks.SanFranEats do
 
   defp expiration(date) do
     [date | _] = String.split(date, " ")
-    [month, day, year] = String.split(date, "/")
-    "#{year}-#{month}-#{day} 00:00:00Z"
+    date_parts = String.split(date, "/")
+    "#{Enum.at(date_parts, 2)}-#{Enum.at(date_parts, 0)}-#{Enum.at(date_parts, 1)} 00:00:00Z"
   end
 end

@@ -1,7 +1,7 @@
-import { MapTrace } from "./hooks/mapbox";
+import { MapBoxHook } from "./hooks/mapbox";
 
 let Hooks = {
-    MapTrace: MapTrace
+    MapBoxHook: MapBoxHook
 }
 
 export default Hooks

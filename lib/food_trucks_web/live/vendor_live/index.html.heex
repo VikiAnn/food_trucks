@@ -7,7 +7,7 @@
   </:actions>
 </.header>
 
-<.map_box id="map" vendors={@streams.vendors} />
+<.map_box id="map" />
 
 <.table
   id="vendors"
@@ -16,7 +16,9 @@
 >
   <:col :let={{_id, vendor}} label="Name"><%= vendor.name %></:col>
   <:col :let={{_id, vendor}} label="Facility type"><%= vendor.facility_type %></:col>
-  <:col :let={{_id, vendor}} label="Location description"><%= vendor.location_description %></:col>
+  <:col :let={{_id, vendor}} label="Location description">
+    <%= vendor.location_description %>
+  </:col>
   <:col :let={{_id, vendor}} label="Address"><%= vendor.address %></:col>
   <:col :let={{_id, vendor}} label="Permit status"><%= vendor.permit_status %></:col>
   <:col :let={{_id, vendor}} label="Food items"><%= vendor.food_items %></:col>
@@ -40,13 +42,13 @@
   </:action>
 </.table>
 
-<.modal :if={@live_action in [:new, :edit]} id="vendor-modal" show on_cancel={JS.patch(~p"/vendors")}>
+<.modal :if={@live_action in [:new, :edit]} id="vendor-modal" show on_cancel={JS.patch(~p"/")}>
   <.live_component
     module={FoodTrucksWeb.VendorLive.FormComponent}
     id={@vendor.id || :new}
     title={@page_title}
     action={@live_action}
     vendor={@vendor}
-    patch={~p"/vendors"}
+    patch={~p"/"}
   />
 </.modal>
